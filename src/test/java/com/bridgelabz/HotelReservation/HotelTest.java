@@ -31,8 +31,33 @@ public class HotelTest
 			assertEquals("Lakewood", h.findCheapestHotel(dateRange));
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			
+		}
+    }
+    @Test
+    public void givenDateRange_WhenBothWeekend_shouldReturnLakewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	dateRange.add("12/09/2020");
+		dateRange.add("13/09/2020");
+		try {
+			assertEquals("Bridgewood", h.findCheapestHotel(dateRange));
+			
+		} catch (ParseException e) {
+			
+		}
+    }
+    @Test
+    public void givenDateRange_WhenOneWeekdayOneWeekend_shouldReturnLakewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	dateRange.add("11/09/2020");
+		dateRange.add("12/09/2020");
+		try {
+			assertEquals("Lakewood", h.findCheapestHotel(dateRange));
+			
+		} catch (ParseException e) {
+			
 		}
     }
 }
