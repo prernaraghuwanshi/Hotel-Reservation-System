@@ -72,13 +72,13 @@ public class HotelReservation {
 	}
 	public static void main(String args[]) throws ParseException {
 		System.out.println("Welcome to Hotel Reservation Program!");
-		HotelReservation h = new HotelReservation();
-		
-		ArrayList<String> dateRange = new ArrayList<String>();
-		dateRange.add("11/09/2020");
-		dateRange.add("12/09/2020");
+//		HotelReservation h = new HotelReservation();
 //		
-		h.findCheapestHotel(dateRange);
+//		ArrayList<String> dateRange = new ArrayList<String>();
+//		dateRange.add("11/09/2020");
+//		dateRange.add("12/09/2020");
+//		
+//		h.findCheapestHotel(dateRange);
 		
 	}
 	
