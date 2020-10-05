@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class HotelReservation {
 	Hotel lakewood = new Hotel("Lakewood", 110, 90, 3);
-	Hotel bridgewood = new Hotel("Bridgewood", 160, 60, 4);
+	Hotel bridgewood = new Hotel("Bridgewood", 150, 50, 4);
 	Hotel ridgewood = new Hotel("Ridgewood", 220, 150, 5);
 	
 	public String dateToDay(String date) throws ParseException 
