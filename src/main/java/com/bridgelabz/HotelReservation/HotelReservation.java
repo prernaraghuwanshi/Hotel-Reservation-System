@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 public class HotelReservation {
 	Hotel lakewood = new Hotel("Lakewood", 110, 90, 3);
@@ -43,6 +44,10 @@ public class HotelReservation {
 	{
 		return Math.min(Math.min(a, b), c);
 	}
+	public int maxOfThree(int a, int b, int c)
+	{
+		return Math.max(Math.max(a, b), c);
+	}
 	public String findCheapestHotel(ArrayList<String> dateRange) throws ParseException
 	{
 		int costOfLakewood = costOfHotel(lakewood, dateRange);
@@ -70,15 +75,61 @@ public class HotelReservation {
 			return "Ridgewood";
 		}
 	}
+	public String findCheapestBestRatedHotel(ArrayList<String> dateRange) throws ParseException
+	{
+		int costOfLakewood = costOfHotel(lakewood, dateRange);
+		int costOfBridgewood = costOfHotel(bridgewood, dateRange);
+		int costOfRidgewood = costOfHotel(ridgewood, dateRange);
+		
+		int minCost = minOfThree(costOfLakewood, costOfBridgewood, costOfRidgewood);
+		List<Hotel> hotelList = new ArrayList<Hotel>();
+		if(minCost == costOfLakewood)
+		{
+			hotelList.add(lakewood);
+		}
+		if (minCost == costOfBridgewood)
+		{
+			hotelList.add(bridgewood);
+		}
+		if (minCost == costOfRidgewood)
+		{
+			hotelList.add(ridgewood);
+		}
+		if(hotelList.size() == 1)
+		{
+			System.out.println("Cheapest Hotel: "+hotelList.get(0).getHotelName());
+			System.out.println("Cost = $"+ minCost);
+			System.out.println("Rating: "+hotelList.get(0).getRating());
+			return hotelList.get(0).getHotelName();
+		}
+		else
+		{
+			int maxRating = 0;
+			int index = -1;
+			for(int i = 0; i< hotelList.size(); i++)
+			{
+				if(hotelList.get(i).getRating() > maxRating)
+				{
+					maxRating = hotelList.get(i).getRating();
+					index = i;
+				}
+			}
+			System.out.println("Cheapest Hotel: "+hotelList.get(index).getHotelName());
+			System.out.println("Cost = $"+ minCost);
+			System.out.println("Rating: "+hotelList.get(index).getRating());
+			return hotelList.get(index).getHotelName();
+		}
+	}
 	public static void main(String args[]) throws ParseException {
 		System.out.println("Welcome to Hotel Reservation Program!");
 //		HotelReservation h = new HotelReservation();
-//		
+//
 //		ArrayList<String> dateRange = new ArrayList<String>();
 //		dateRange.add("11/09/2020");
 //		dateRange.add("12/09/2020");
-//		
+//
 //		h.findCheapestHotel(dateRange);
+//		h.findCheapestBestRatedHotel(dateRange);
 		
 	}
 	

@@ -28,7 +28,7 @@ public class HotelTest
     	dateRange.add("10/09/2020");
 		dateRange.add("11/09/2020");
 		try {
-			assertEquals("Lakewood", h.findCheapestHotel(dateRange));
+			assertEquals("Lakewood", h.findCheapestBestRatedHotel(dateRange));
 			
 		} catch (ParseException e) {
 			
@@ -41,23 +41,24 @@ public class HotelTest
     	dateRange.add("12/09/2020");
 		dateRange.add("13/09/2020");
 		try {
-			assertEquals("Bridgewood", h.findCheapestHotel(dateRange));
+			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange));
 			
 		} catch (ParseException e) {
 			
 		}
     }
     @Test
-    public void givenDateRange_WhenOneWeekdayOneWeekend_shouldReturnLakewood()
+    public void givenDateRange_WhenOneWeekdayOneWeekend_shouldReturnBridgewood()
     {
     	ArrayList<String> dateRange = new ArrayList<String>();
     	dateRange.add("11/09/2020");
 		dateRange.add("12/09/2020");
 		try {
-			assertEquals("Lakewood", h.findCheapestHotel(dateRange));
+			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange));
 			
 		} catch (ParseException e) {
 			
 		}
     }
+    
 }
