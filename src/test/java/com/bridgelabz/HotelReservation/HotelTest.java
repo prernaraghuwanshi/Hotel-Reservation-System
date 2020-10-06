@@ -25,10 +25,11 @@ public class HotelTest
     public void givenDateRange_WhenBothWeekday_shouldReturnLakewood()
     {
     	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = false;
     	dateRange.add("10/09/2020");
 		dateRange.add("11/09/2020");
 		try {
-			assertEquals("Lakewood", h.findCheapestBestRatedHotel(dateRange));
+			assertEquals("Lakewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
 			
 		} catch (ParseException e) {
 			
@@ -38,10 +39,11 @@ public class HotelTest
     public void givenDateRange_WhenBothWeekend_shouldReturnLakewood()
     {
     	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = false;
     	dateRange.add("12/09/2020");
 		dateRange.add("13/09/2020");
 		try {
-			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange));
+			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
 			
 		} catch (ParseException e) {
 			
@@ -51,10 +53,11 @@ public class HotelTest
     public void givenDateRange_WhenOneWeekdayOneWeekend_shouldReturnBridgewood()
     {
     	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = false;
     	dateRange.add("11/09/2020");
 		dateRange.add("12/09/2020");
 		try {
-			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange));
+			assertEquals("Bridgewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
 			
 		} catch (ParseException e) {
 			
@@ -64,15 +67,57 @@ public class HotelTest
     public void givenDateRange_WhenFindingBestRatedHotel_shouldReturnRidgewood()
     {
     	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = false;
     	dateRange.add("11/09/2020");
 		dateRange.add("12/09/2020");
 		try {
-			assertEquals("Ridgewood", h.findBestRatedHotel(dateRange));
+			assertEquals("Ridgewood", h.findBestRatedHotel(dateRange, isRewardee));
 			
 		} catch (ParseException e) {
 			
 		}
     }
-    
+    @Test
+    public void givenDateRangeAndRewardee_WhenBothWeekday_shouldReturnLakewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = true;
+    	dateRange.add("10/09/2020");
+		dateRange.add("11/09/2020");
+		try {
+			assertEquals("Lakewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
+			
+		} catch (ParseException e) {
+			
+		}
+    }
+    @Test
+    public void givenDateRangeAndRewardee_WhenBothWeekend_shouldReturnLakewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = true;
+    	dateRange.add("12/09/2020");
+		dateRange.add("13/09/2020");
+		try {
+			assertEquals("Ridgewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
+			
+		} catch (ParseException e) {
+			
+		}
+    }
+    @Test
+    public void givenDateRangeAndRewardee_WhenOneWeekdayOneWeekend_shouldReturnBridgewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	boolean isRewardee = true;
+    	dateRange.add("11/09/2020");
+		dateRange.add("12/09/2020");
+		try {
+			assertEquals("Ridgewood", h.findCheapestBestRatedHotel(dateRange, isRewardee));
+			
+		} catch (ParseException e) {
+			
+		}
+    }
     
 }

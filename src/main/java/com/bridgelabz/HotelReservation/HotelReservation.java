@@ -21,21 +21,34 @@ public class HotelReservation {
 		String day=format2.format(dt);
 		return day;
 	}
-	public int costOfHotel(Hotel hotelName, ArrayList<String> dateRange) throws ParseException
+	public int costOfHotel(Hotel hotelName, ArrayList<String> dateRange, boolean isRewardee) throws ParseException
 	{
 		Iterator<String> it = dateRange.iterator();
 		int cost = 0;
 		while(it.hasNext())
 		{
 			String day = dateToDay(it.next());
-			
-			if(day.equals("Saturday") || day.equals("Sunday"))
+			if(!isRewardee)
 			{
-				cost += hotelName.getWeekendRate();
+				if(day.equals("Saturday") || day.equals("Sunday"))
+				{
+					cost += hotelName.getWeekendRate();
+				}
+				else
+				{
+					cost += hotelName.getWeekdayRate();
+				}
 			}
 			else
 			{
-				cost += hotelName.getWeekdayRate();
+				if(day.equals("Saturday") || day.equals("Sunday"))
+				{
+					cost += hotelName.getWeekendRateReward();
+				}
+				else
+				{
+					cost += hotelName.getWeekdayRateReward();
+				}
 			}
 		}
 		return cost;
@@ -48,11 +61,11 @@ public class HotelReservation {
 	{
 		return Math.max(Math.max(a, b), c);
 	}
-	public String findCheapestHotel(ArrayList<String> dateRange) throws ParseException
+	public String findCheapestHotel(ArrayList<String> dateRange, boolean isRewardee) throws ParseException
 	{
-		int costOfLakewood = costOfHotel(lakewood, dateRange);
-		int costOfBridgewood = costOfHotel(bridgewood, dateRange);
-		int costOfRidgewood = costOfHotel(ridgewood, dateRange);
+		int costOfLakewood = costOfHotel(lakewood, dateRange, isRewardee);
+		int costOfBridgewood = costOfHotel(bridgewood, dateRange,isRewardee);
+		int costOfRidgewood = costOfHotel(ridgewood, dateRange, isRewardee);
 		
 		int minCost = minOfThree(costOfLakewood, costOfBridgewood, costOfRidgewood);
 		
@@ -75,11 +88,11 @@ public class HotelReservation {
 			return "Ridgewood";
 		}
 	}
-	public String findCheapestBestRatedHotel(ArrayList<String> dateRange) throws ParseException
+	public String findCheapestBestRatedHotel(ArrayList<String> dateRange, boolean isRewardee) throws ParseException
 	{
-		int costOfLakewood = costOfHotel(lakewood, dateRange);
-		int costOfBridgewood = costOfHotel(bridgewood, dateRange);
-		int costOfRidgewood = costOfHotel(ridgewood, dateRange);
+		int costOfLakewood = costOfHotel(lakewood, dateRange, isRewardee);
+		int costOfBridgewood = costOfHotel(bridgewood, dateRange, isRewardee);
+		int costOfRidgewood = costOfHotel(ridgewood, dateRange, isRewardee);
 		int index = -1;
 		int minCost = minOfThree(costOfLakewood, costOfBridgewood, costOfRidgewood);
 		List<Hotel> hotelList = new ArrayList<Hotel>();
@@ -116,7 +129,7 @@ public class HotelReservation {
 		System.out.println("Rating: "+hotelList.get(index).getRating());
 		return hotelList.get(index).getHotelName();
 	}
-	public String findBestRatedHotel(ArrayList<String> dateRange) throws ParseException
+	public String findBestRatedHotel(ArrayList<String> dateRange, boolean isRewardee) throws ParseException
 	{
 		int bestRating = maxOfThree(lakewood.getRating(), bridgewood.getRating(), ridgewood.getRating());
 		String outputHotel;
@@ -124,17 +137,17 @@ public class HotelReservation {
 		if(bestRating == lakewood.getRating())
 		{
 			outputHotel = "Lakewood";
-			cost = costOfHotel(lakewood, dateRange);
+			cost = costOfHotel(lakewood, dateRange, isRewardee);
 		}
 		else if (bestRating == bridgewood.getRating())
 		{
 			outputHotel = "Bridgewood";
-			cost = costOfHotel(bridgewood, dateRange);
+			cost = costOfHotel(bridgewood, dateRange, isRewardee);
 		}
 		else
 		{
 			outputHotel = "Ridgewood";
-			cost = costOfHotel(ridgewood, dateRange);
+			cost = costOfHotel(ridgewood, dateRange, isRewardee);
 		}
 		System.out.println("Best rated Hotel: "+outputHotel);
 		System.out.println("Cost = $"+ cost);
@@ -149,9 +162,9 @@ public class HotelReservation {
 //		dateRange.add("11/09/2020");
 //		dateRange.add("12/09/2020");
 //
-//		h.findCheapestHotel(dateRange);
-//		h.findCheapestBestRatedHotel(dateRange);
-//		h.findBestRatedHotel(dateRange);
+//		boolean isRewardee = true;
+//		h.findCheapestBestRatedHotel(dateRange, isRewardee);
+//		
 		
 	}
 	
