@@ -60,5 +60,19 @@ public class HotelTest
 			
 		}
     }
+    @Test
+    public void givenDateRange_WhenFindingBestRatedHotel_shouldReturnRidgewood()
+    {
+    	ArrayList<String> dateRange = new ArrayList<String>();
+    	dateRange.add("11/09/2020");
+		dateRange.add("12/09/2020");
+		try {
+			assertEquals("Ridgewood", h.findBestRatedHotel(dateRange));
+			
+		} catch (ParseException e) {
+			
+		}
+    }
+    
     
 }

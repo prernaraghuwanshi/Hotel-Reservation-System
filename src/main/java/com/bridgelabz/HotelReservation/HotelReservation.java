@@ -80,7 +80,7 @@ public class HotelReservation {
 		int costOfLakewood = costOfHotel(lakewood, dateRange);
 		int costOfBridgewood = costOfHotel(bridgewood, dateRange);
 		int costOfRidgewood = costOfHotel(ridgewood, dateRange);
-		
+		int index = -1;
 		int minCost = minOfThree(costOfLakewood, costOfBridgewood, costOfRidgewood);
 		List<Hotel> hotelList = new ArrayList<Hotel>();
 		if(minCost == costOfLakewood)
@@ -97,15 +97,11 @@ public class HotelReservation {
 		}
 		if(hotelList.size() == 1)
 		{
-			System.out.println("Cheapest Hotel: "+hotelList.get(0).getHotelName());
-			System.out.println("Cost = $"+ minCost);
-			System.out.println("Rating: "+hotelList.get(0).getRating());
-			return hotelList.get(0).getHotelName();
+			index = 0;
 		}
 		else
 		{
 			int maxRating = 0;
-			int index = -1;
 			for(int i = 0; i< hotelList.size(); i++)
 			{
 				if(hotelList.get(i).getRating() > maxRating)
@@ -114,11 +110,36 @@ public class HotelReservation {
 					index = i;
 				}
 			}
-			System.out.println("Cheapest Hotel: "+hotelList.get(index).getHotelName());
-			System.out.println("Cost = $"+ minCost);
-			System.out.println("Rating: "+hotelList.get(index).getRating());
-			return hotelList.get(index).getHotelName();
 		}
+		System.out.println("Cheapest Hotel: "+hotelList.get(index).getHotelName());
+		System.out.println("Cost = $"+ minCost);
+		System.out.println("Rating: "+hotelList.get(index).getRating());
+		return hotelList.get(index).getHotelName();
+	}
+	public String findBestRatedHotel(ArrayList<String> dateRange) throws ParseException
+	{
+		int bestRating = maxOfThree(lakewood.getRating(), bridgewood.getRating(), ridgewood.getRating());
+		String outputHotel;
+		int cost; 
+		if(bestRating == lakewood.getRating())
+		{
+			outputHotel = "Lakewood";
+			cost = costOfHotel(lakewood, dateRange);
+		}
+		else if (bestRating == bridgewood.getRating())
+		{
+			outputHotel = "Bridgewood";
+			cost = costOfHotel(bridgewood, dateRange);
+		}
+		else
+		{
+			outputHotel = "Ridgewood";
+			cost = costOfHotel(ridgewood, dateRange);
+		}
+		System.out.println("Best rated Hotel: "+outputHotel);
+		System.out.println("Cost = $"+ cost);
+		System.out.println("Rating: "+ bestRating);
+		return outputHotel;
 	}
 	public static void main(String args[]) throws ParseException {
 		System.out.println("Welcome to Hotel Reservation Program!");
@@ -130,6 +151,7 @@ public class HotelReservation {
 //
 //		h.findCheapestHotel(dateRange);
 //		h.findCheapestBestRatedHotel(dateRange);
+//		h.findBestRatedHotel(dateRange);
 		
 	}
 	
