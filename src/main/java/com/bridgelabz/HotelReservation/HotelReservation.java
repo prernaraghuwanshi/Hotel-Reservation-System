@@ -11,12 +11,14 @@ public class HotelReservation {
 	Hotel bridgewood = new Hotel("Bridgewood", 160, 60, 4);
 	Hotel ridgewood = new Hotel("Ridgewood", 220, 150, 5);
 
+	// Takes date and gives day of the week as output
 	public String dateToDay(String date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate localDate = LocalDate.parse(date, formatter);
 		return localDate.getDayOfWeek().name();
 	}
 
+	// Function to find cost of a hotel
 	public int costOfHotel(Hotel hotelName, ArrayList<String> dateRange) {
 		Iterator<String> it = dateRange.iterator();
 		int cost = 0;
@@ -31,10 +33,12 @@ public class HotelReservation {
 		return cost;
 	}
 
+	// Function to find minimum of three value
 	public int minOfThree(int value1, int value2, int value3) {
 		return Math.min(Math.min(value1, value2), value3);
 	}
 
+	// Function to find Cheapest hotel in the given date range
 	public String findCheapestHotel(ArrayList<String> dateRange) {
 		int costOfLakewood = costOfHotel(lakewood, dateRange);
 		int costOfBridgewood = costOfHotel(bridgewood, dateRange);
